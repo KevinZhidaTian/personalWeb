@@ -1,0 +1,36 @@
+.headerContainer {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+}
+
+.mobileHeader {
+  margin: 50px;
+  position: relative;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.desktopHeader {
+    margin: 50px;
+    position: relative;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+.fixed {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    top: 0;
+    background: #101010;
+}

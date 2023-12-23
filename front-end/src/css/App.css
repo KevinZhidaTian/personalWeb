@@ -1,0 +1,91 @@
+.App {
+  text-align: center;
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+}
+
+.homeWrapper {
+  /* position: relative; */
+  height: 100vh;
+  /* top: 140px; */
+}
+
+.background-enabled {
+  background: transparent;
+  border-bottom-color: transparent;
+}
+.homeWrapper .portrait {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.portrait.mobile img {
+  /* width: 220vw; */
+  position: relative;
+  top: -100px;
+  min-height: 100vh;
+  max-height: 130vh;
+  height: 70%;
+}
+
+.portrait.desktop img {
+  /* width: 100vw; */
+  position: relative;
+  top: -100px;
+  min-height: 100vh;
+  max-height: 130vh;
+  height: 70%;
+}
+
+.homeWrapper .contacts {
+  z-index: 12;
+  position: absolute;
+  bottom: 50px;
+  left: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+.homeWrapper .socialLink {
+  z-index: 12;
+  position: absolute;
+  bottom: 50px;
+  right: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.homeWrapper .socialLink .icon {
+  margin-bottom: 10px;
+}
+
+.homeWrapper .followMe {
+  z-index: 12;
+  position: absolute;
+  bottom: 200px;
+  right: 55px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+  
+}
+
+
+.homeWrapper .followMe::after {
+  content: "";
+  position: absolute;
+  bottom: -40px;
+  right: -17px;
+  width: 50px;
+  height: 1px;
+  background: #fff;
+  transform: rotate(90deg);
+}
