@@ -6,6 +6,11 @@ import { backdropClasses, styled } from "@mui/material";
 import { CV } from "./CV";
 import { Portfolio } from "./Portfolio";
 import { AboutMe } from "./AboutMe";
+import { JobExperience } from "../types/types";
+import { requestHandler } from "../utils/requestHandler";
+import getConfig from "../utils/getConfig";
+import axios from "axios";
+import { title } from "process";
 
 interface StyledTabsProps {
   children?: React.ReactNode;
@@ -49,15 +54,55 @@ const StyledTab = styled((props: StyledTabProps) => (
   },
 }));
 
-function a11yProps(index: number) {
+const a11yProps = (index: number) => {
   return {
     id: `simple-tab-${index}`,
     "aria-controls": `simple-tabpanel-${index}`,
   };
-}
+};
 
+const getJobExperience = requestHandler((params) =>
+  axios.get(`${params}/getExperience`)
+);
+
+const getPortfolio = requestHandler((params) =>
+  axios.get(`${params}/getPortfolio`)
+);
 export const Main = (props: any) => {
   const [value, setValue] = React.useState(0);
+  const [experience, setExperience] = React.useState<JobExperience[]>([
+    {
+      startMonth: "",
+      startYear: "",
+      // isPresent: true,
+      company: "",
+      careerLevel: "",
+      project: {
+        "": {
+          role: "",
+          details: [""],
+        },
+      },
+    },
+  ]);
+  const [imgData, setImgData] = React.useState([{ img: "", title: "" }]);
+
+  React.useEffect(() => {
+    (async () => {
+      const { backendDomain } = await getConfig();
+
+      const getExpResponse = await getJobExperience(backendDomain);
+      const getPortfolioResponse = await getPortfolio(backendDomain);
+
+      if (getExpResponse.code === "success") {
+        setExperience(getExpResponse.data.events);
+      }
+
+      if (getPortfolioResponse.code === "success") {
+        setImgData(getPortfolioResponse.data.imgData);
+      }
+    })();
+  }, []);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -68,9 +113,8 @@ export const Main = (props: any) => {
       className="main"
       sx={{
         display: "flex",
-        position: 'relative',
+        position: "relative",
         width: "100%",
-        height: "100vh",
         zIndex: 13,
         alignItems: "center",
         justifyContent: "flex-start",
@@ -104,8 +148,8 @@ export const Main = (props: any) => {
           {...a11yProps(2)}
         />
       </StyledTabs>
-      <CV value={value} index={0} />
-      <Portfolio value={value} index={1} />
+      <CV value={value} index={0} experience={experience} />
+      <Portfolio value={value} index={1} imgData={imgData} />
       <AboutMe value={value} index={2} />
     </Box>
   );

@@ -36,7 +36,7 @@ export const Home = (props: any) => {
   console.log(contact);
 
   return (
-    <Box className="homeWrapper">
+    <Box className="homeWrapper" >
       {props.device && props.device === "mobile" ? (
         <Box className="portrait mobile" ref={props.imgancher}>
           <img src={portrait} alt=" " />
@@ -92,7 +92,7 @@ export const Home = (props: any) => {
             flexDirection: "column",
             alignItems: "center",
             flexWrap: "nowrap",
-            justifyContent: "flex-end",
+            justifyContent: "center",
             position: "relative",
             zIndex: 14,
             width: "60vw",
@@ -100,21 +100,41 @@ export const Home = (props: any) => {
         >
           <Typography
             sx={{
-              fontSize: "6rem",
+              fontSize: props.device === "desktop" ? "4vh" : "3vw",
               fontWeight: 1,
               color: "#e7e7e7",
-              marginBottom: '50px',
+              visibility: props.scrolled > 0 && props.mainOffset > 200 ? "visible" : "hidden",
+              opacity: props.scrolled > 0 && props.mainOffset > 200 ? "1" : "0",
+              transition: "opacity .15s cubic-bezier(.25, .46, .45, .94), transform .35s cubic-bezier(.25, .46, .45, .94)",
+              transitionProperty: "visibility, opacity",
+              position: "fixed",
+              top: "70px",
+            }}
+          >
+            KEVIN TIAN
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: props.device === "desktop" ? "30vh" : "20vw",
+              fontWeight: 1,
+              color: "#e7e7e7",
+              visibility: props.scrolled > 0 ? "hidden" : "visible",
+              opacity: props.scrolled > 0 ? "0" : "1",
+              transition:
+                "opacity .7s cubic-bezier(.25, .46, .45, .94), transform .35s cubic-bezier(.25, .46, .45, .94)",
+              transitionProperty: "visibility, opacity",
             }}
           >
             KEVIN TIAN
           </Typography>
           <KeyboardArrowDownIcon
             sx={{
-              position: "relative",
+              position: "absolute",
+              bottom: "0px",
               zIndex: 14,
               fontSize: "3rem",
               color: "#e7e7e7",
-              margin: '4vh 0',
+              margin: "4vh 0",
               "&:hover": {
                 cursor: "pointer",
                 color: "white",

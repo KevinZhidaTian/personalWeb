@@ -5,7 +5,9 @@ import { VideoBg } from "./components/VideoBg";
 import { Home } from "./components/Home";
 import { Main } from "./components/Main";
 function App() {
-  const [device, setDevice] = useState("desktop");
+  const [device, setDevice] = useState("");
+  const [scrolled, setScrolled] = useState(0);
+  const [mainOffset, setMainOffSet] = useState<undefined|number>(0);
   const imgancher = useRef(null);
   const mainAncher = useRef<null | HTMLElement>(null);
   const handleScrollButtonClick = () => {
@@ -16,16 +18,22 @@ function App() {
       inline: "start",
     });
   };
-  console.log(mainAncher);
+
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 1200) {
+      if (window.innerWidth >= 1000) {
         setDevice("desktop");
       } else {
         setDevice("mobile");
       }
     };
+    const handleScroll = () => {
+      setScrolled(window.scrollY);
+      setMainOffSet(mainAncher.current?.getBoundingClientRect().y);
+      console.log(mainAncher.current?.getBoundingClientRect().y);
+    };
     window.addEventListener("resize", handleResize);
+    window.addEventListener("scroll", handleScroll);
   });
 
   return (
@@ -36,6 +44,8 @@ function App() {
         imgancher={imgancher}
         device={device}
         handleScrollButtonClick={handleScrollButtonClick}
+        scrolled={scrolled}
+        mainOffset={mainOffset}
       />
       <Main mainAncher={mainAncher} />
     </div>

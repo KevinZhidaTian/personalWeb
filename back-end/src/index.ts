@@ -1,5 +1,7 @@
 import express, { Request, Response } from "express";
 import getContacts from "./middleWares/getContacts";
+import getExperience from "./middleWares/getExperience";
+import getPortfolio from "./middleWares/getPortfolio";
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -16,6 +18,8 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.get("/getContacts", getContacts);
+app.get("/getExperience", getExperience);
+app.get("/getPortfolio", getPortfolio);
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
