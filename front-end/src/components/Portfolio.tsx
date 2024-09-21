@@ -3,14 +3,11 @@ import * as React from "react";
 import { CustomTabPanel } from "./CustomTabPanel";
 import { ImgDialog } from "./ImgDialog";
 import styled from "@emotion/styled";
+import LazyImage from "./LazyImage";
+import { imgData } from "../types/types";
 
 interface MasonryImageListProps {
-  imgData: [
-    {
-      img: string;
-      title?: string;
-    }
-  ];
+  imgData: imgData[];
   handleImgClick: React.MouseEventHandler<HTMLLIElement>;
 }
 
@@ -70,11 +67,10 @@ const MasonryImageList = (props: MasonryImageListProps) => {
                 },
               }}
             >
-              <img
-                srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                src={`${item.img}?w=248&fit=crop&auto=format`}
-                alt={item.title}
-                loading="lazy"
+              <LazyImage
+                img={item}
+                handleImgClick={props.handleImgClick}
+                key={index}
               />
             </ImageListItem>
           </CustomedGrow>

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import { Card, CardMedia, Dialog, DialogContent } from "@mui/material";
 
 interface ImgDialog {

@@ -1,13 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { lazy, Suspense, useEffect, useRef, useState } from "react";
 import "./css/App.css";
-import { HeaderContainer } from "./components/Headers";
-import { VideoBg } from "./components/VideoBg";
-import { Home } from "./components/Home";
-import { Main } from "./components/Main";
+// import { HeaderContainer } from "./components/headers";
+const Home = lazy(() => import("./components/Home"));
+const VideoBg = lazy(() => import("./components/VideoBg"));
+const Main = lazy(() => import("./components/Main"));
 function App() {
   const [device, setDevice] = useState("");
   const [scrolled, setScrolled] = useState(0);
-  const [mainOffset, setMainOffSet] = useState<undefined|number>(0);
+  const [mainOffset, setMainOffSet] = useState<undefined | number>(0);
   const imgancher = useRef(null);
   const mainAncher = useRef<null | HTMLElement>(null);
   const handleScrollButtonClick = () => {
@@ -47,7 +47,9 @@ function App() {
         scrolled={scrolled}
         mainOffset={mainOffset}
       />
-      <Main mainAncher={mainAncher} />
+      <Suspense fallback={<div></div>}>
+        <Main mainAncher={mainAncher} />
+      </Suspense>
     </div>
   );
 }

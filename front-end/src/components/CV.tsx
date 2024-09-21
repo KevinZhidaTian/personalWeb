@@ -6,6 +6,7 @@ import { JobExperience } from "../types/types";
 import { requestHandler } from "../utils/requestHandler";
 import getConfig from "../utils/getConfig";
 import axios from "axios";
+import { isArray } from "util";
 
 interface JobExperienceProps {
   id: number | String;
@@ -32,19 +33,31 @@ const ExperienceBox = (props: JobExperienceProps) => {
         <h3>{props.event.company}</h3>
         <h4>{props.event.careerLevel}</h4>
         {props.event.project &&
+          !Array.isArray(props.event.project) &&
           Object.entries(props.event.project).map(
             ([project, content], index) => {
               return (
-                  <div key={index}>
-                    <strong>{project}</strong>
-                    <br />
-                    {content.role ? <p>{content.role}</p> : <></>}
-                    {content.details &&
-                      content.details.map((detail: string, index) => <p key={index}>{detail}</p>)}
-                  </div>
+                <div key={index}>
+                  <strong>{project}</strong>
+                  <br />
+                  {content.role ? <p>{content.role}</p> : <></>}
+                  {content.details &&
+                    content.details.map((detail: string, index) => (
+                      <p key={index}>{detail}</p>
+                    ))}
+                </div>
               );
             }
           )}
+        {props.event.project &&
+          Array.isArray(props.event.project) &&
+          props.event.project.map((content, index) => {
+            return (
+              <div key={index}>
+                <p>{content}</p>
+              </div>
+            );
+          })}
       </div>
     </li>
   );

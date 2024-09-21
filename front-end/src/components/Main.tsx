@@ -68,7 +68,7 @@ const getJobExperience = requestHandler((params) =>
 const getPortfolio = requestHandler((params) =>
   axios.get(`${params}/getPortfolio`)
 );
-export const Main = (props: any) => {
+export default function Main(props: any) {
   const [value, setValue] = React.useState(0);
   const [experience, setExperience] = React.useState<JobExperience[]>([
     {
@@ -122,8 +122,8 @@ export const Main = (props: any) => {
         flexDirection: "column",
         flexWrap: "no-wrap",
         marginTop: "30px",
-        scrollSnapAlign: 'start',
-        scrollSnapStop: 'always',
+        scrollSnapAlign: "start",
+        scrollSnapStop: "always",
       }}
       ref={props.mainAncher}
     >
@@ -155,4 +155,4 @@ export const Main = (props: any) => {
       <AboutMe value={value} index={2} />
     </Box>
   );
-};
+}

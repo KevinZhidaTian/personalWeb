@@ -14,7 +14,7 @@ const getContacts = requestHandler((params) =>
   axios.get(`${params}/getContacts`)
 );
 
-export const Home = (props: any) => {
+export default function Home(props: any) {
   const [contact, setContact] = useState({
     email: "",
     phone: "",
@@ -36,7 +36,7 @@ export const Home = (props: any) => {
   console.log(contact);
 
   return (
-    <Box className="homeWrapper" >
+    <Box className="homeWrapper">
       {props.device && props.device === "mobile" ? (
         <Box className="portrait mobile" ref={props.imgancher}>
           <img src={portrait} alt=" " />
@@ -103,9 +103,13 @@ export const Home = (props: any) => {
               fontSize: props.device === "desktop" ? "4vh" : "3vw",
               fontWeight: 1,
               color: "#e7e7e7",
-              visibility: props.scrolled > 0 && props.mainOffset > 200 ? "visible" : "hidden",
+              visibility:
+                props.scrolled > 0 && props.mainOffset > 200
+                  ? "visible"
+                  : "hidden",
               opacity: props.scrolled > 0 && props.mainOffset > 200 ? "1" : "0",
-              transition: "opacity .15s cubic-bezier(.25, .46, .45, .94), transform .35s cubic-bezier(.25, .46, .45, .94)",
+              transition:
+                "opacity .15s cubic-bezier(.25, .46, .45, .94), transform .35s cubic-bezier(.25, .46, .45, .94)",
               transitionProperty: "visibility, opacity",
               position: "fixed",
               top: "70px",
@@ -192,4 +196,4 @@ export const Home = (props: any) => {
       </Box>
     </Box>
   );
-};
+}
