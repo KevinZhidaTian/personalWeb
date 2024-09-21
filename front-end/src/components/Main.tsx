@@ -122,6 +122,8 @@ export const Main = (props: any) => {
         flexDirection: "column",
         flexWrap: "no-wrap",
         marginTop: "30px",
+        scrollSnapAlign: 'start',
+        scrollSnapStop: 'always',
       }}
       ref={props.mainAncher}
     >
