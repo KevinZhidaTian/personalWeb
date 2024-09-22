@@ -9,6 +9,7 @@ import getConfig from "../utils/getConfig";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import "../css/App.css";
 
 const getContacts = requestHandler((params) =>
   axios.get(`${params}/getContacts`)
@@ -114,6 +115,7 @@ export default function Home(props: any) {
               position: "fixed",
               top: "70px",
             }}
+            className="prevent-select"
           >
             KEVIN TIAN
           </Typography>
@@ -128,6 +130,7 @@ export default function Home(props: any) {
                 "opacity .7s cubic-bezier(.25, .46, .45, .94), transform .35s cubic-bezier(.25, .46, .45, .94)",
               transitionProperty: "visibility, opacity",
             }}
+            className="prevent-select"
           >
             KEVIN TIAN
           </Typography>

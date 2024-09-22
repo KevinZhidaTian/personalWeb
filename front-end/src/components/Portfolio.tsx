@@ -87,8 +87,8 @@ export const Portfolio = (props: any) => {
   const handleImgClick = (e: any) => {
     if (e.target.getAttribute("src")) {
       setOpenDialog(true);
-      // setDialogImg(e.target.getAttribute("src").replace("preview", "full"));
-      setDialogImg(e.target.getAttribute("src"));
+      setDialogImg(e.target.getAttribute("src").replace("preview", "full"));
+      // setDialogImg(e.target.getAttribute("src"));
     }
   };
 

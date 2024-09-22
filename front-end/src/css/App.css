@@ -77,9 +77,7 @@
   flex-direction: column;
   align-items: flex-end;
   justify-content: flex-end;
-  
 }
-
 
 .homeWrapper .followMe::after {
   content: "";
@@ -90,4 +88,10 @@
   height: 1px;
   background: #fff;
   transform: rotate(90deg);
+}
+
+.prevent-select {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }
