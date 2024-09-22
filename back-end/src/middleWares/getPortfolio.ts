@@ -7,13 +7,20 @@ export default async (req: Request, res: Response) => {
   const s3Client = new S3Client({ region: "eu-west-2" });
   const listObjectCommand = new ListObjectsV2Command({
     Bucket: "portfolio-kevintzd",
+    Prefix: "full/",
   });
 
   const pictures = await s3Client.send(listObjectCommand);
+
   const imgData: imgData[] =
-    pictures.Contents?.map((content) => ({
-      img: baseUrl.concat(content.Key || ""),
-    })) || [];
+    pictures.Contents?.filter((content) => content.Key !== "full/").map(
+      (content) => ({
+        img: baseUrl.concat(content.Key || ""),
+        previewImg: baseUrl
+          .concat("preview/")
+          .concat(content.Key?.split("/")[1] || ""),
+      })
+    ) || [];
   console.log(imgData);
   // const imgData: imgData[] = [
   //   {

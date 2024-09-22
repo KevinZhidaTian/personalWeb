@@ -18,5 +18,6 @@ export type JobExperience = {
 
 export type imgData = {
   img: string;
+  previewImg: string;
   title?: string;
 };
