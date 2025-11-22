@@ -1,1 +1,4 @@
 uploadImages/index.js
+*.js
+*.d.ts
+*node_modules

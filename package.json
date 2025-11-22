@@ -1,0 +1,24 @@
+{
+  "name": "personalweb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"npm start --prefix back-end\" \"npm start --prefix front-end\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KevinZhidaTian/personalWeb.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/KevinZhidaTian/personalWeb/issues"
+  },
+  "homepage": "https://github.com/KevinZhidaTian/personalWeb#readme",
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
