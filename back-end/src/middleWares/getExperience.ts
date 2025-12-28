@@ -1,7 +1,7 @@
-import { Request, Response } from "express";
-import { JobExperience } from "../types/types";
+import type { Request, Response } from "express";
+import type { JobExperience } from "../types/types.ts";
 
-export default async (req: Request, res: Response) => {
+export default (_req: Request, res: Response) => {
   const getExperience: JobExperience[] = [
     {
       startMonth: "November",

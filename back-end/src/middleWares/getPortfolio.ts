@@ -1,8 +1,8 @@
-import { Request, Response } from "express";
-import { imgData } from "../types/types";
+import type { Request, Response } from "express";
+import type { imgData } from "../types/types.ts";
 import { ListObjectsV2Command, S3Client } from "@aws-sdk/client-s3";
 
-export default async (req: Request, res: Response) => {
+export default async (_req: Request, res: Response) => {
   const baseUrl = "https://portfolio-kevintzd.s3.eu-west-2.amazonaws.com/";
   const s3Client = new S3Client({ region: "eu-west-2" });
   const listObjectCommand = new ListObjectsV2Command({
@@ -21,7 +21,6 @@ export default async (req: Request, res: Response) => {
           .concat(content.Key?.split("/")[1] || ""),
       })
     ) || [];
-  console.log(imgData);
   // const imgData: imgData[] = [
   //   {
   //     img: "https://profolio-pic.s3.amazonaws.com/0H1A0041+copy.jpg",

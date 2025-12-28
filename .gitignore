@@ -2,3 +2,7 @@ uploadImages/index.js
 *.js
 *.d.ts
 *node_modules
+rust-back-end/target
+*/.idea
+.DS_Store
+.vscode/
