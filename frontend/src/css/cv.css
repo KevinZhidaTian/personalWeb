@@ -5,13 +5,24 @@
   list-style-type: none;
 }
 
-.timeline::before {
+.timeline.desktop::before {
   background-color: white;
   content: "";
   margin-left: -1px;
   position: absolute;
   top: 1em;
   left: 2em;
+  width: 2px;
+  height: 100%;
+}
+
+.timeline.mobile::before {
+  background-color: white;
+  content: "";
+  margin-left: -1px;
+  position: absolute;
+  top: 1em;
+  left: 0.5em;
   width: 2px;
   height: 100%;
 }
@@ -29,11 +40,20 @@
   box-shadow: inset 40em 0 0 0 rgb(168, 50, 121);
 }
 
-.timeline-event-copy {
+.timeline-event-copy.desktop {
   padding: 2em;
   position: relative;
   top: -1.875em;
   left: 4em;
+  width: 80%;
+  text-align: left;
+}
+
+.timeline-event-copy.mobile {
+  padding: 2em;
+  position: relative;
+  top: -1.875em;
+  left: 2em;
   width: 80%;
   text-align: left;
 }
@@ -55,7 +75,7 @@
   padding-bottom: 1.2em;
 }
 
-.timeline-event-icon {
+.timeline-event-icon.desktop {
   transition: transform 0.2s ease-in;
   transform: rotate(45deg);
   background-color: white;
@@ -65,6 +85,20 @@
   position: absolute;
   top: 0;
   left: 2em;
+  width: 1em;
+  height: 1em;
+}
+
+.timeline-event-icon.mobile {
+  transition: transform 0.2s ease-in;
+  transform: rotate(45deg);
+  background-color: white;
+  outline: 10px solid #101010;
+  display: block;
+  margin: 0.5em 0.5em 0.5em -0.5em;
+  position: absolute;
+  top: 0;
+  left: 0.5em;
   width: 1em;
   height: 1em;
 }

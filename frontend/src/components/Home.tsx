@@ -3,7 +3,6 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import { useEffect, useState } from "react";
-import { requestHandler } from "../utils/requestHandler.ts";
 import axios from "axios";
 import getConfig from "../utils/getConfig.ts";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
@@ -11,18 +10,17 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import "../css/App.css";
 
-const getContacts = requestHandler((params) =>
-  axios.get(`${params}/getContacts`)
-);
-
 interface HomeProps {
   device: string;
-  imgancher: React.RefObject<HTMLDivElement>;
+  isVertical: boolean;
+  imgAnchor: React.RefObject<HTMLElement> | React.RefObject<null>;
   handleScrollButtonClick: React.MouseEventHandler<SVGSVGElement>;
   scrolled: number;
-  mainOffset: number;
+  mainOffset: number | undefined;
 }
 export default function Home(props: HomeProps) {
+  const { backendDomain } = getConfig();
+
   const [contact, setContact] = useState({
     email: "",
     phone: "",
@@ -30,26 +28,36 @@ export default function Home(props: HomeProps) {
     instagram: "",
   });
 
+  const getFontSize = () => {
+    if (props.isVertical) {
+      return "20vw";
+    }
+    if (props.device === "desktop") {
+      return "23vh";
+    }
+    return "20vh";
+  };
+
   useEffect(() => {
-    (async function () {
-      const { backendDomain } = await getConfig();
-      const response = await getContacts(backendDomain);
-      if (response.code === "error") {
+    const getContacts = axios.get(`${backendDomain}/getContacts`);
+
+    getContacts.then((response) => {
+      if (!response.data) {
         setContact({ email: "", phone: "", linkedIn: "", instagram: "" });
       } else {
         setContact(response.data);
       }
-    })();
+    });
   }, []);
 
   return (
     <Box className="homeWrapper">
       {props.device && props.device === "mobile" ? (
-        <Box className="portrait mobile" ref={props.imgancher}>
+        <Box className="portrait mobile" ref={props.imgAnchor}>
           <img src={portrait} alt=" " />
         </Box>
       ) : (
-        <Box className="portrait desktop" ref={props.imgancher}>
+        <Box className="portrait desktop" ref={props.imgAnchor}>
           <img src={portrait} alt=" " />
         </Box>
       )}
@@ -109,10 +117,13 @@ export default function Home(props: HomeProps) {
               fontWeight: 1,
               color: "#e7e7e7",
               visibility:
-                props.scrolled > 0 && props.mainOffset > 200
+                props.scrolled > 0 && props.mainOffset && props.mainOffset > 200
                   ? "visible"
                   : "hidden",
-              opacity: props.scrolled > 0 && props.mainOffset > 200 ? "1" : "0",
+              opacity:
+                props.scrolled > 0 && props.mainOffset && props.mainOffset > 200
+                  ? "1"
+                  : "0",
               transition:
                 "opacity .15s cubic-bezier(.25, .46, .45, .94), transform .35s cubic-bezier(.25, .46, .45, .94)",
               transitionProperty: "visibility, opacity",
@@ -125,7 +136,8 @@ export default function Home(props: HomeProps) {
           </Typography>
           <Typography
             sx={{
-              fontSize: props.device === "desktop" ? "30vh" : "20vw",
+              fontFamily: "Phosphate",
+              fontSize: getFontSize(),
               fontWeight: 1,
               color: "#e7e7e7",
               visibility: props.scrolled > 0 ? "hidden" : "visible",

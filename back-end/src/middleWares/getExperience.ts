@@ -4,11 +4,10 @@ import type { JobExperience } from "../types/types.ts";
 export default (_req: Request, res: Response) => {
   const getExperience: JobExperience[] = [
     {
-      startMonth: "November",
-      startYear: "2022",
-      isPresent: true,
+      start_month: "November",
+      start_year: "2022",
       company: "Accenture",
-      careerLevel: "Analyst",
+      career_level: "Analyst",
       project: {
         "F1 TV": {
           role: "Backend Developer",
@@ -19,21 +18,21 @@ export default (_req: Request, res: Response) => {
       },
     },
     {
-      startMonth: "September",
-      startYear: "2022",
+      start_month: "September",
+      start_year: "2022",
+      finish_month: "February",
+      finish_year: "2023",
       company: "BarPop",
-      finishMonth: "February",
-      finishYear: "2023",
-      careerLevel: "Bartender",
+      career_level: "Bartender",
       project: ["Serving alcohol to clients"],
     },
     {
-      startMonth: "April",
-      startYear: "2021",
-      finishMonth: "September",
-      finishYear: "2021",
+      start_month: "April",
+      start_year: "2021",
+      finish_month: "September",
+      finish_year: "2021",
       company: "University of Nottingham",
-      careerLevel: "Student",
+      career_level: "Student",
       project: {
         "GAN-Based Augmentation for varied plant dataset": {
           details: [
@@ -42,21 +41,18 @@ export default (_req: Request, res: Response) => {
         },
         "Data Modelling and Analysis of SDSS DR14 dataset": {
           details: [
-            `Applied data analysis, pre-processing, data mining and data classification
-            to a slightly modified version of a real-world dataset. The dataset consists
-            of over 10,000 observations of space taken by the SDSS. I managed to
-            extract knowledge from the dataset and predict new results.`,
+            "Applied data analysis, pre-processing, data mining and data classification to a slightly modified version of a real-world dataset. a slightly modified version of a real-world dataset. The dataset consists of over 10,000 observations of space taken by the SDSS. I managed to extract knowledge from the dataset and predict new results.",
           ],
         },
       },
     },
     {
-      startMonth: "May",
-      startYear: "2021",
-      finishMonth: "June",
-      finishYear: "2021",
+      start_month: "May",
+      start_year: "2021",
+      finish_month: "June",
+      finish_year: "2021",
       company: "Hubei Minzu University",
-      careerLevel: "Student",
+      career_level: "Student",
       project: {
         "Target Detection Web Application": {
           details: [

@@ -40,8 +40,8 @@ export default function LazyImage(props: LazyImageProps) {
       }}
     >
       <img
-        srcSet={`${props.img.previewImg}?w=248&fit=crop&auto=format&dpr=2 2x`}
-        src={`${props.img.previewImg}?w=248&fit=crop&auto=format`}
+        srcSet={`${props.img.preview_img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+        src={`${props.img.preview_img}?w=248&fit=crop&auto=format`}
         alt={props.img.title}
         loading="lazy"
       />

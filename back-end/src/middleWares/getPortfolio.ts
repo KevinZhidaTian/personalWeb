@@ -16,7 +16,7 @@ export default async (_req: Request, res: Response) => {
     pictures.Contents?.filter((content) => content.Key !== "full/").map(
       (content) => ({
         img: baseUrl.concat(content.Key || ""),
-        previewImg: baseUrl
+        preview_img: baseUrl
           .concat("preview/")
           .concat(content.Key?.split("/")[1] || ""),
       })

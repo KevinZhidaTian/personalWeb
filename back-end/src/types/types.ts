@@ -6,18 +6,18 @@ interface projectExp {
 }
 
 export type JobExperience = {
-  startMonth: string;
-  startYear: string;
-  isPresent?: boolean;
-  finishMonth?: string;
-  finishYear?: string;
+  start_month: string;
+  start_year: string;
+  is_present?: boolean;
+  finish_month?: string;
+  finish_year?: string;
   company: string;
-  careerLevel?: string;
+  career_level?: string;
   project: projectExp | string[];
 };
 
 export type imgData = {
   img: string;
-  previewImg: string;
+  preview_img: string;
   title?: string;
 };

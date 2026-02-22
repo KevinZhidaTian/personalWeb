@@ -39,14 +39,6 @@ export const ImgDialog = (props: ImgDialog) => {
             objectPosition: "center",
           }}
         ></img>
-        {/* <CardMedia
-          sx={{
-            height: "100%",
-            backgroundSize: "contain",
-            backgroundColor: "transparent",
-          }}
-          image={props.dialogImg}
-        /> */}
       </DialogContent>
     </Dialog>
   );

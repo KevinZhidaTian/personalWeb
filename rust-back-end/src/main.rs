@@ -1,40 +1,32 @@
-use actix_web::{App, HttpResponse, HttpServer, Responder, get, post, web};
-use serde_json::json;
+use crate::database::connection::Database;
+use actix_web::http::KeepAlive;
+use actix_web::middleware::DefaultHeaders;
+use actix_web::{App, HttpResponse, HttpServer, Responder, get};
 
+mod api;
+mod database;
+mod utils;
 #[get("/")]
-async fn hello() -> impl Responder {
-    HttpResponse::Ok().body("Hello world!")
-}
-
-#[get("/getContacts")]
-async fn get_contacts() -> impl Responder {
-    let body = json!({
-        "email": "kevintzd@outlook.com",
-        "phone": "+ 44 07594739847",
-        "linkedIn": "https: //www.linkedin.com/in/kevin-tian-6257b8200/",
-        "instagram": "https: //www.instagram.com/kevin_tzd/",
-    });
-    HttpResponse::Ok().body(body.to_string())
-}
-
-#[post("/echo")]
-async fn echo(req_body: String) -> impl Responder {
-    HttpResponse::Ok().body(req_body)
-}
-
-async fn manual_hello() -> impl Responder {
-    HttpResponse::Ok().body("Hey there!")
+async fn index() -> impl Responder {
+    HttpResponse::Ok().body("Kevin's Personal Website Backend")
 }
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    HttpServer::new(|| {
+    let database = Database::new("myapp.db");
+    let state = actix_web::web::Data::new(database);
+    HttpServer::new(move || {
         App::new()
-            .service(hello)
-            .service(echo)
-            .service(get_contacts)
-            .route("/hey", web::get().to(manual_hello))
+            .app_data(state.clone())
+            .wrap(
+                DefaultHeaders::new()
+                    .add(("Access-Control-Allow-Origin", "*"))
+                    .add(("Access-Control-Allow-Methods", "GET, POST, OPTIONS"))
+                    .add(("Access-Control-Allow-Headers", "Content-Type")),
+            )
+            .configure(api::config)
     })
+    .keep_alive(KeepAlive::Os)
     .bind(("localhost", 8080))?
     .run()
     .await

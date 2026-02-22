@@ -1,0 +1,10 @@
+Hello!
+
+Welcome to my page. My name is Kevin, and I’m from a small town in China. I wanted to create this website to share some of my pictures and a bit of my story — why not, right?
+
+I work as a software engineer now, though it wasn’t my original career plan back in school. I studied Digital Media Technology for my undergraduate degree. The name might sound a bit vague — it’s essentially a blend of art and computer science. Rather than learning traditional software development, I focused on areas like 3D modeling and animation, game development, and visual effects, all within the animation and gaming industry. For some reason I can’t quite recall, in my final year of university I became interested in AI, especially computer vision. That eventually led me to pursue a master’s in AI at the University of Nottingham in the UK.
+Before becoming a software engineer, I took on quite a few different roles: I worked as a bartender at a nightclub, a ramen chef in a large chain restaurant, and even as an animal caregiver at a sanctuary. I’ve had all sorts of jobs — experiences I probably wouldn’t have had if I’d stayed in China.
+
+In 2022, I joined Accenture as a graduate and started working as a backend developer for a well-known motorsports client. That was my first time working with TypeScript and Node.js — and I’ve been on the same project ever since.
+
+Because of my unconventional background, I might not have the “complete” foundation in software engineering. That’s why I spend weekends studying things like programming languages, algorithms, and various topics in computer science. This website is actually one of the projects I’ve been building in my free time. Lately, I’ve been getting into computer graphics and Rust — a bit ambitious, I know, but we’ll see where it goes!

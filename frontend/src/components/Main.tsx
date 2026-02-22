@@ -6,8 +6,7 @@ import { styled } from "@mui/material";
 import { CV } from "./CV.tsx";
 import { Portfolio } from "./Portfolio.tsx";
 import { AboutMe } from "./AboutMe.tsx";
-import type { JobExperience } from "../types/types.ts";
-import { requestHandler } from "../utils/requestHandler.ts";
+import type { JobExperienceResponse } from "../types/types.ts";
 import getConfig from "../utils/getConfig.ts";
 import axios from "axios";
 
@@ -23,7 +22,9 @@ interface StyledTabProps {
 const StyledTabs = styled((props: StyledTabsProps) => (
   <Tabs
     {...props}
-    TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }}
+    slotProps={{
+      indicator: { children: <span className="MuiTabs-indicatorSpan" /> },
+    }}
   />
 ))({
   "& .MuiTabs-indicator": {
@@ -49,7 +50,7 @@ const StyledTab = styled((props: StyledTabProps) => (
     color: "#fff",
   },
   "&.Mui-focusVisible": {
-    backgroudColor: "rgba(100, 95, 228, 0.32)",
+    backgroundColor: "rgba(100, 95, 228, 0.32)",
   },
 }));
 
@@ -60,51 +61,42 @@ const a11yProps = (index: number) => {
   };
 };
 
-const getJobExperience = requestHandler((params) =>
-  axios.get(`${params}/getExperience`)
-);
-
-const getPortfolio = requestHandler((params) =>
-  axios.get(`${params}/getPortfolio`)
-);
 export default function Main(props: {
-  mainAncher: React.RefObject<HTMLDivElement>;
+  mainAnchor: React.RefObject<HTMLElement | null>;
+  device: string;
 }) {
+  const { backendDomain } = getConfig();
   const [value, setValue] = React.useState(0);
-  const [experience, setExperience] = React.useState<JobExperience[]>([
-    {
-      startMonth: "",
-      startYear: "",
-      // isPresent: true,
-      company: "",
-      careerLevel: "",
-      project: {
-        "": {
-          role: "",
-          details: [""],
-        },
-      },
-    },
-  ]);
+  const [experience, setExperience] = React.useState<JobExperienceResponse[]>(
+    [],
+  );
   const [imgData, setImgData] = React.useState([
-    { img: "", title: "", previewImg: "" },
+    { img: "", title: "", preview_img: "" },
   ]);
+  const [aboutMe, setAboutMe] = React.useState("");
 
   React.useEffect(() => {
-    (async () => {
-      const { backendDomain } = await getConfig();
+    const getExpResponse = axios.get(`${backendDomain}/getExp`);
+    const getPortfolioResponse = axios.get(`${backendDomain}/getPortfolio`);
+    const getAboutMeResponse = axios.get(`${backendDomain}/getAboutMe`);
 
-      const getExpResponse = await getJobExperience(backendDomain);
-      const getPortfolioResponse = await getPortfolio(backendDomain);
-
-      if (getExpResponse.code === "success") {
-        setExperience(getExpResponse.data.events);
+    getExpResponse.then((response) => {
+      if (response.status === 200) {
+        setExperience(response.data);
       }
+    });
 
-      if (getPortfolioResponse.code === "success") {
-        setImgData(getPortfolioResponse.data.imgData);
+    getPortfolioResponse.then((response) => {
+      if (response.status === 200) {
+        setImgData(response.data.imgData);
       }
-    })();
+    });
+
+    getAboutMeResponse.then((response) => {
+      if (response.status === 200) {
+        setAboutMe(response.data);
+      }
+    });
   }, []);
 
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
@@ -128,7 +120,7 @@ export default function Main(props: {
         scrollSnapAlign: "start",
         scrollSnapStop: "always",
       }}
-      ref={props.mainAncher}
+      ref={props.mainAnchor}
     >
       <StyledTabs value={value} onChange={handleChange} sx={{ zIndex: 13 }}>
         <StyledTab
@@ -153,9 +145,14 @@ export default function Main(props: {
           {...a11yProps(2)}
         />
       </StyledTabs>
-      <CV value={value} index={0} experience={experience} />
+      <CV
+        value={value}
+        index={0}
+        experience={experience}
+        device={props.device}
+      />
       <Portfolio value={value} index={1} imgData={imgData} />
-      <AboutMe value={value} index={2} />
+      <AboutMe value={value} index={2} aboutMe={aboutMe} />
     </Box>
   );
 }

@@ -1,6 +1,8 @@
 {
   "tasks": {
-    "start": "deno run -A npm:concurrently \"npm start --prefix back-end\" \"npm run start --prefix frontend\"",
+    "start:old": "deno run -A npm:concurrently \"npm start --prefix back-end\" \"npm run start --prefix frontend\"",
+    "start": "npm run start --prefix frontend & ./rust-back-end/target/debug/rust-back-end",
+    "start:web": "npm run start --prefix frontend",
     "lint": "deno lint",
     "fmt": "deno fmt"
   },
