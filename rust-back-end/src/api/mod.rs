@@ -1,6 +1,6 @@
 pub mod cv;
-pub mod experience;
 pub mod gallery;
+pub mod experience;
 
 use actix_web::web;
 

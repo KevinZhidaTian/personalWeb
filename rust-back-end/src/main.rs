@@ -1,7 +1,7 @@
 use crate::database::connection::Database;
 use actix_web::http::KeepAlive;
 use actix_web::middleware::DefaultHeaders;
-use actix_web::{App, HttpResponse, HttpServer, Responder, get};
+use actix_web::{App, HttpResponse, HttpServer, Responder, get, web};
 
 mod api;
 mod database;
@@ -13,8 +13,8 @@ async fn index() -> impl Responder {
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    let database = Database::new("myapp.db");
-    let state = actix_web::web::Data::new(database);
+    let database = Database::new("myapp.db").unwrap();
+    let state = web::Data::new(database);
     HttpServer::new(move || {
         App::new()
             .app_data(state.clone())

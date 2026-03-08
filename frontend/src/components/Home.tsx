@@ -33,7 +33,7 @@ export default function Home(props: HomeProps) {
       return "20vw";
     }
     if (props.device === "desktop") {
-      return "23vh";
+      return "20vh";
     }
     return "20vh";
   };

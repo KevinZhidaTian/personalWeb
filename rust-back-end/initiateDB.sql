@@ -3,7 +3,6 @@ CREATE TABLE pictures (
     s3_url TEXT NOT NULL,
     uploaded_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
-
 CREATE INDEX idx_pictures_uploaded_at ON pictures(uploaded_at DESC);
 
 CREATE TABLE IF NOT EXISTS projects (

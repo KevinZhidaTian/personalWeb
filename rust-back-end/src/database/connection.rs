@@ -6,7 +6,7 @@ pub struct Database {
 }
 
 impl Database {
-    pub fn new(path: &str) -> Result<Self> {
+    pub fn new(path: &str) -> Result<Database> {
         let conn = Connection::open(path)?;
         conn.execute_batch(
             "PRAGMA foreign_keys = ON;
