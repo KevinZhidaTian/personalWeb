@@ -8,5 +8,13 @@ aws-config = "1.8.10"
 aws-sdk-dynamodb = "1.98.0"
 aws-sdk-s3 = "1.124.0"
 clap = { version = "4.5.51", features = ["cargo", "derive"] }
+image = { version = "0.25", default-features = false, features = [
+    "jpeg",
+    "png",
+    "webp",
+    "gif",
+    "bmp",
+    "ico",
+    "tiff",
+] }
 tokio = { version = "1.49.0", features = ["full"] }
-rimage = { version = "0.12.3" }
