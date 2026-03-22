@@ -1,0 +1,9 @@
+uploadImages/index.js
+*.js
+*.d.ts
+*node_modules
+rust-back-end/target
+upload_images/target
+*/.idea
+.DS_Store
+.vscode/
