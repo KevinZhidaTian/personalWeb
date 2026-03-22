@@ -100,15 +100,19 @@ export const Portfolio = (props: PortfolioProps) => {
           width: "75vw",
         }}
       >
-        <MasonryImageList
-          imgData={props.imgData}
-          handleImgClick={handleImgClick}
-        />
-        <ImgDialog
-          dialogImg={dialogImg}
-          openDialog={openDialog}
-          handleClose={handleClose}
-        />
+        {props.imgData.length >= 0 && (
+          <div>
+            <MasonryImageList
+              imgData={props.imgData}
+              handleImgClick={handleImgClick}
+            />
+            <ImgDialog
+              dialogImg={dialogImg}
+              openDialog={openDialog}
+              handleClose={handleClose}
+            />
+          </div>
+        )}
       </Box>
     </CustomTabPanel>
   );
